@@ -1,0 +1,57 @@
+trabalho-java-garagem-loop
+└── demo
+    │── pom.xml
+    │── src
+    │   │── main
+    │   │   │── java
+    │   │   │   └── com
+    │   │   │       └── example
+    │   │   │           │── Carro.java
+    │   │   │           │── Garagem.java
+    │   │   │           │── ListaCircular.java
+    │   │   │           │── Main.java
+    │   │   │           └── Nó.java
+    │   │   └── resources
+    │   └── test
+    │       └── java
+    │           └── com
+    │               └── example
+    │                   │── CarroTest.java
+    │                   │── GaragemTest.java
+    │                   └── ListaCircularTest.java
+    └── target
+        │── classes
+        │   └── com
+        │       └── example
+        │           │── Carro.class
+        │           │── Garagem.class
+        │           │── ListaCircular.class
+        │           │── Main.class
+        │           └── Nó.class
+        │── generated-sources
+        │   └── annotations
+        │── generated-test-sources
+        │   └── test-annotations
+        │── maven-status
+        │   └── maven-compiler-plugin
+        │       │── compile
+        │       │   └── default-compile
+        │       │       │── createdFiles.lst
+        │       │       └── inputFiles.lst
+        │       └── testCompile
+        │           └── default-testCompile
+        │               │── createdFiles.lst
+        │               └── inputFiles.lst
+        │── surefire-reports
+        │   │── com.example.CarroTest.txt
+        │   │── com.example.GaragemTest.txt
+        │   │── com.example.ListaCircularTest.txt
+        │   │── TEST-com.example.CarroTest.xml
+        │   │── TEST-com.example.GaragemTest.xml
+        │   └── TEST-com.example.ListaCircularTest.xml
+        └── test-classes
+            └── com
+                └── example
+                    │── CarroTest.class
+                    │── GaragemTest.class
+                    └── ListaCircularTest.class
