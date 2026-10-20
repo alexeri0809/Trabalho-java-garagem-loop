@@ -1,57 +1,397 @@
 trabalho-java-garagem-loop
-└── demo
-    │── pom.xml
-    │── src
-    │   │── main
-    │   │   │── java
-    │   │   │   └── com
-    │   │   │       └── example
-    │   │   │           │── Carro.java
-    │   │   │           │── Garagem.java
-    │   │   │           │── ListaCircular.java
-    │   │   │           │── Main.java
-    │   │   │           └── Nó.java
-    │   │   └── resources
-    │   └── test
-    │       └── java
-    │           └── com
-    │               └── example
-    │                   │── CarroTest.java
-    │                   │── GaragemTest.java
-    │                   └── ListaCircularTest.java
-    └── target
-        │── classes
-        │   └── com
-        │       └── example
-        │           │── Carro.class
-        │           │── Garagem.class
-        │           │── ListaCircular.class
-        │           │── Main.class
-        │           └── Nó.class
-        │── generated-sources
-        │   └── annotations
-        │── generated-test-sources
-        │   └── test-annotations
-        │── maven-status
-        │   └── maven-compiler-plugin
-        │       │── compile
-        │       │   └── default-compile
-        │       │       │── createdFiles.lst
-        │       │       └── inputFiles.lst
-        │       └── testCompile
-        │           └── default-testCompile
-        │               │── createdFiles.lst
-        │               └── inputFiles.lst
-        │── surefire-reports
-        │   │── com.example.CarroTest.txt
-        │   │── com.example.GaragemTest.txt
-        │   │── com.example.ListaCircularTest.txt
-        │   │── TEST-com.example.CarroTest.xml
-        │   │── TEST-com.example.GaragemTest.xml
-        │   └── TEST-com.example.ListaCircularTest.xml
-        └── test-classes
-            └── com
-                └── example
-                    │── CarroTest.class
-                    │── GaragemTest.class
-                    └── ListaCircularTest.class
+│── .git
+│   │── COMMIT_EDITMSG
+│   │── config
+│   │── description
+│   │── HEAD
+│   │── hooks
+│   │   │── applypatch-msg.sample
+│   │   │── commit-msg.sample
+│   │   │── fsmonitor-watchman.sample
+│   │   │── post-update.sample
+│   │   │── pre-applypatch.sample
+│   │   │── pre-commit.sample
+│   │   │── pre-merge-commit.sample
+│   │   │── pre-push.sample
+│   │   │── pre-rebase.sample
+│   │   │── pre-receive.sample
+│   │   │── prepare-commit-msg.sample
+│   │   │── push-to-checkout.sample
+│   │   │── sendemail-validate.sample
+│   │   └── update.sample
+│   │── index
+│   │── info
+│   │   └── exclude
+│   │── logs
+│   │   │── HEAD
+│   │   └── refs
+│   │       │── heads
+│   │       │   └── main
+│   │       └── remotes
+│   │           └── origin
+│   │               └── main
+│   │── objects
+│   │   │── 00
+│   │   │   └── 3398e34f99e27222231143149e183586c1b35d
+│   │   │── 02
+│   │   │   │── b12074c1f9c4e851e2c2153802d266a9ddaf5f
+│   │   │   └── d79bb8b8fea542d447a18d49d7a3c543f2d065
+│   │   │── 04
+│   │   │   └── 8d06685d5f6a010db9775487c1f8a65de0ad8a
+│   │   │── 08
+│   │   │   │── 5c7627041b93dc6a09400730d664c80cfe0348
+│   │   │   └── 80927c33b10cf6259a5fe3460cff78ca274fe7
+│   │   │── 09
+│   │   │   └── 714ba7e3ecb9002b985b569f2f9c01dfa91ea7
+│   │   │── 0d
+│   │   │   └── 59754fc4adb2e15c50f5f6a6ff2e509e6af170
+│   │   │── 0e
+│   │   │   └── 9e17382ec087dd0c51e1d5d31766de4f6925ee
+│   │   │── 11
+│   │   │   │── 7de0f374be54ae6adb28fdd68ab02be4b0a961
+│   │   │   │── 8686bfe2a2afa7ba951b9bf7081049d091aea5
+│   │   │   └── a93ff04fe14a7d0e0861e72da984f28c1a358a
+│   │   │── 12
+│   │   │   │── 53993d963f073aa899bbe95c6aff17d843c21c
+│   │   │   └── acc62248e5e6e254a2150108795b1bd10efe55
+│   │   │── 14
+│   │   │   └── 96a505ab025b233a5e632ec8913d8db97f12d3
+│   │   │── 17
+│   │   │   └── 9903645fbf89e600c2e556950c84a2bdb64517
+│   │   │── 19
+│   │   │   └── 35fd41b06de08bcb181f26636beed3ea96d12c
+│   │   │── 1b
+│   │   │   └── 049ba2563be89d82216b65e6e501592c6aac25
+│   │   │── 1c
+│   │   │   └── c28ee1314e1cae4a66bd416358bad56fae3b14
+│   │   │── 1e
+│   │   │   │── 5e0f8b5aeeb3bb0c67dfd24451ba19abf011ee
+│   │   │   └── fb41092413296d924ef501605b9479f6741e51
+│   │   │── 22
+│   │   │   └── 214615f251aefb697d6496d7d816948c26d10c
+│   │   │── 23
+│   │   │   │── 846607deffc8f2d0a8a77d517c298dc4eb9a25
+│   │   │   │── aa9cdfffe06a5e23bc7afb33234eeba8cbc678
+│   │   │   └── fc3300cc8f06b3f1d1f9f9a23465eaea386e28
+│   │   │── 26
+│   │   │   └── 5931af03d3a412e6a2ec947de430fbc412ec3b
+│   │   │── 2e
+│   │   │   └── b31ccfcc89f8256f37c46ad498a832be4317fb
+│   │   │── 2f
+│   │   │   └── 7e95a07b01066db523a2f6e6a948c7cbdd9ad6
+│   │   │── 30
+│   │   │   └── 6b888191cbc2d2d15788350849a3b58e7117f2
+│   │   │── 32
+│   │   │   └── b64d1e93b2ab3771b8de1f4967f3baf87a8412
+│   │   │── 35
+│   │   │   └── 606d2fdcc9b99c6e7fc8e1d22b79b6fe167fa9
+│   │   │── 3a
+│   │   │   └── 0e9c000fcdc226be7abc6ef603bc7cd57db2fa
+│   │   │── 3b
+│   │   │   └── f05870a6d36056ba2d890790a08350eb9096be
+│   │   │── 3d
+│   │   │   └── 556cdebfa7a82c4d9e4eefb7f59ec6d9a2d2fe
+│   │   │── 3f
+│   │   │   └── d690a2bb574915113884e0762e3fb0da224897
+│   │   │── 42
+│   │   │   └── 9666664e9ff5029d51dc7f807e1ec9eff2dd9f
+│   │   │── 44
+│   │   │   │── 18b1ccb5207997a0db993ff43fa69dae79d8a1
+│   │   │   └── 8c9c7f8124eef3ba680db8c40b9b34e984c983
+│   │   │── 46
+│   │   │   └── bfbaa5c548a2e66714781a7b179557b3ea2acf
+│   │   │── 48
+│   │   │   │── 1f8262db809490cf19b10d69afd08075f4d808
+│   │   │   └── 36531462a248599a15f1175470677187cb4755
+│   │   │── 4a
+│   │   │   └── 9327b44aa5603e71d289c54c8ae43c18cef082
+│   │   │── 4b
+│   │   │   └── 54939c31bab5d9aa1895747b4a9d76b1027f3f
+│   │   │── 4c
+│   │   │   └── 8ecc77afc816ccb4ef5e5c9a778bb14956c4f8
+│   │   │── 4d
+│   │   │   └── cd83083b10ea4b5889b10d2f69b476f2b91582
+│   │   │── 4e
+│   │   │   └── 157e493303b5a332baaa55839ba53261854741
+│   │   │── 4f
+│   │   │   │── 0341cb1e80e5282567bff09905610cbd5c84c8
+│   │   │   └── d6d8dafba00a4982e8b5ddae389750b983733f
+│   │   │── 50
+│   │   │   └── ff737c581d3cb13d45f205e9f83d0d421d0878
+│   │   │── 52
+│   │   │   └── 16b65e8951757b1faf702fa1278e933502f739
+│   │   │── 53
+│   │   │   │── 539bd1d49e42edfcdf375dfc75f812ef43a0d3
+│   │   │   │── 5d9943a6e5f5e2265bbe1adace705974462919
+│   │   │   └── 8b0b31b6dc631cba1b247b28a79d9741ae5cdf
+│   │   │── 54
+│   │   │   └── 0dfd336d84a8924ab72bfb20ed10a0c4ca3521
+│   │   │── 56
+│   │   │   └── aca70ee866c956f4c47fff8c783c34bacb337c
+│   │   │── 57
+│   │   │   │── 7740e5749884ae71fb68b49df962b9414ff2fe
+│   │   │   └── 9f810f1e7664e85cf550223df46e46b26e0c55
+│   │   │── 58
+│   │   │   │── d38ac986e2e8e3305d06d8e05255a7c1fbe7de
+│   │   │   └── fd2f7229e6168012b2f3b58406a4bc2f2281f0
+│   │   │── 5c
+│   │   │   └── bbb42a2b4a9da0e55c89f9876bf15ddba7a285
+│   │   │── 5d
+│   │   │   └── 1e8c906ecadc408d0e379781c11bea64072e0d
+│   │   │── 63
+│   │   │   └── d072789a934deb84566a35771a0a564e4f8cad
+│   │   │── 68
+│   │   │   │── decde3c36b42f45dd8fc797d2af339ac0ac300
+│   │   │   └── e7d3bcaff30a0528b2fbf55c8b7219574d860a
+│   │   │── 6c
+│   │   │   │── 88ca451832215762aa67f6c3624c3821b3a805
+│   │   │   └── cef8927c1a3f465ae8c12e1e921b81b26e5d6a
+│   │   │── 6e
+│   │   │   │── 75fecb9521cdf34b82f6db722466e266f587ed
+│   │   │   └── 787f0d4377f7e43e31ea4de9afdc1d51aaed11
+│   │   │── 73
+│   │   │   └── 3f32cc4e499057cf736c8425913621d3022b3d
+│   │   │── 79
+│   │   │   │── 8b78f3aa2a7d7c703ff7f25429bfa79af7bc92
+│   │   │   └── bb4f292ece483378d5b3405a7234ded9c3a25e
+│   │   │── 7e
+│   │   │   └── 0692dc969911237b916a901f62fad203f968e2
+│   │   │── 7f
+│   │   │   │── 37b5d99122b4928505d1e0ac5ca7279edd56ed
+│   │   │   └── 591b5166c10aeedcd201b75791f2e995df8f14
+│   │   │── 81
+│   │   │   └── 8e9304a25129e733e2b1cc29fba1bd285180d2
+│   │   │── 88
+│   │   │   └── 741e51c81af45d12a7969a78c9112b51be00a6
+│   │   │── 8a
+│   │   │   └── 1cd56a869d38261e682adb2eea62579a4fb14f
+│   │   │── 8b
+│   │   │   └── 400c7ab81b7b18baff3f81d597f5e511883134
+│   │   │── 8c
+│   │   │   └── 9e3cf3e3ae6f73bc815ba1f6e2491e2a5f8651
+│   │   │── 94
+│   │   │   └── 617c8cc942e3fb9f1fa23dd3869456ac402866
+│   │   │── 98
+│   │   │   │── 05648e4e9a42e10b8737dd75beb5536b68b9f9
+│   │   │   └── bf5dc3e51b1f22e686a2017d8c684eea8193a0
+│   │   │── 9a
+│   │   │   └── 761a959801eb3e1e066d31bbbd164e60b38f86
+│   │   │── 9b
+│   │   │   └── b36e0cf13506a11ceddd7a07b77883c3ce5e92
+│   │   │── 9d
+│   │   │   │── 298993291ea9d38328ed47420398a900dea0ff
+│   │   │   └── c139c25f2a853dfd6d3eafaeb4bef70aef2849
+│   │   │── 9e
+│   │   │   └── 712d72e46d6a0d2f3d72095c55cb36ac76b021
+│   │   │── 9f
+│   │   │   └── 5381bf7c8b7edc85cdb127d1d138a90a706a2c
+│   │   │── a0
+│   │   │   └── 17c9ae229025d7b9902b2c21c59122953046c6
+│   │   │── a1
+│   │   │   └── c02077e0d72aa7f76d070e848fda9e3f20bcc4
+│   │   │── a2
+│   │   │   │── c7f8a0d6b4ae1a92b9fdd0c1f42f7880ca937b
+│   │   │   └── d6672a57a38dd6eceb2c67e711ece824c19112
+│   │   │── a3
+│   │   │   └── 916c035b5c1d2aafac3cbc449b9be82fff7d1d
+│   │   │── a7
+│   │   │   └── 63ec6f187407cc62d9e72441be5a2de664c577
+│   │   │── a8
+│   │   │   └── ab8deb7df20d299c26f4b1cd2dccff48a53a7b
+│   │   │── aa
+│   │   │   └── 4e0bf5822cb60b7c8196e393a47981988337eb
+│   │   │── ac
+│   │   │   └── da6d926c990e1d4f3fd6a9a901b82500a55eb9
+│   │   │── ad
+│   │   │   └── e4c32fecb812f10b7bca56da3b6852a2112c33
+│   │   │── b0
+│   │   │   │── 409806b1b08d41f323b5d533b939a2130a5d0e
+│   │   │   │── 4f452036894b6b6ef6ee91b02f182c81c21a0a
+│   │   │   │── 7ac7e8c730489f9a18d49c5d80440972cb52f1
+│   │   │   └── 9fbffda83916c5011ca2590af26625001e5bef
+│   │   │── b5
+│   │   │   └── 89551a73a7cff3f52bfb0d6be759eb43df89d1
+│   │   │── b8
+│   │   │   └── 82bdb0b15fe7fa029a119565c4dbc75db8b18e
+│   │   │── b9
+│   │   │   └── b9bee780009178d1d0e33492dc2ac6f2ce0303
+│   │   │── ba
+│   │   │   └── fee344ea62454f2cdb243b40fcd3cb3f2f13fc
+│   │   │── bd
+│   │   │   └── 0838a0abc18ebd3a16f83a7ee01f0d2f235a67
+│   │   │── be
+│   │   │   └── 3646bacc4f83ac3703fc688440065d5712ec96
+│   │   │── c0
+│   │   │   └── 695103402c946adc031bbd3dee4e5610b9503c
+│   │   │── c5
+│   │   │   └── a2b60e70579d992d7d48ddba889bb9ce193ba8
+│   │   │── c8
+│   │   │   │── 7f96b857d68a247267af3e6de053f30cfae86f
+│   │   │   └── 997515cb36a08e3f2c3f72cd766d4d85ece251
+│   │   │── d3
+│   │   │   └── 73c4cddf89c831af33d1993c3700d38dff5efa
+│   │   │── d6
+│   │   │   └── 9f63e7fa5dca73164b92b5dd584e5e91af3109
+│   │   │── d8
+│   │   │   └── 3683894ba4d305802bce4c3ae2133168b07571
+│   │   │── da
+│   │   │   └── 66a7749468832bcb75262418a9f1db3e9195ea
+│   │   │── dc
+│   │   │   └── 8fc841a5762f9856ad86521db2ceeea03df2cd
+│   │   │── dd
+│   │   │   └── cefd443dadbd18294e439376b45ccc6fd2232d
+│   │   │── de
+│   │   │   └── e25510141478966d8142cbc001b251755afe20
+│   │   │── e1
+│   │   │   └── b06f2c2b361d9c3923863757d60ce4a61f132b
+│   │   │── e3
+│   │   │   └── 62bc03cf0844e9e4df9ac915593060a8ef23d8
+│   │   │── e9
+│   │   │   └── f1f9d64ae9e9748120a1765de10efd02142857
+│   │   │── ea
+│   │   │   └── cb77c2373c249ec10b7a99b066303c86d348c8
+│   │   │── eb
+│   │   │   └── 042bbe59ebb98c1822cb2acec21b0a0f25df88
+│   │   │── ec
+│   │   │   └── 0d815eea43a82d66f792645520c3e502ca8881
+│   │   │── f3
+│   │   │   └── c6d0929e0a3110c09933411dd2fc2946a3a3bd
+│   │   │── f7
+│   │   │   └── 994c7f7ed3d93cd97671da15014542639afa8d
+│   │   │── f8
+│   │   │   └── 130d6564834101e6db14dc3b80d088ef49e642
+│   │   │── fa
+│   │   │   └── 601d5e125b6da2e13e12f96f512370ecf3458a
+│   │   │── fb
+│   │   │   │── a042136cc40898c3037cc049795432ac4cf0c9
+│   │   │   └── d08667297639eb475a949113573fc63b38e64c
+│   │   │── fc
+│   │   │   └── ee112057964b6673b7393f5c4c0be68f0b6e4f
+│   │   │── ff
+│   │   │   │── 700cd09f6ea0cc497f68169fd5c210bdaa7c2b
+│   │   │   └── 7df85e8f66e9958e91c2b9051bbea12b520ddb
+│   │   │── info
+│   │   └── pack
+│   └── refs
+│       │── heads
+│       │   └── main
+│       │── remotes
+│       │   └── origin
+│       │       └── main
+│       └── tags
+│── demo
+│   │── pom.xml
+│   │── src
+│   │   │── main
+│   │   │   │── java
+│   │   │   │   └── com
+│   │   │   │       └── example
+│   │   │   │           │── Carro.java
+│   │   │   │           │── Garagem.java
+│   │   │   │           │── ListaCircular.java
+│   │   │   │           │── Main.java
+│   │   │   │           │── Matricula.java
+│   │   │   │           └── Nó.java
+│   │   │   └── resources
+│   │   └── test
+│   │       └── java
+│   │           └── com
+│   │               └── example
+│   │                   │── CarroTest.java
+│   │                   │── GaragemTest.java
+│   │                   └── ListaCircularTest.java
+│   └── target
+│       │── classes
+│       │   └── com
+│       │       └── example
+│       │           │── Carro.class
+│       │           │── Garagem.class
+│       │           │── ListaCircular.class
+│       │           │── Main.class
+│       │           │── Matricula.class
+│       │           └── Nó.class
+│       │── generated-sources
+│       │   └── annotations
+│       │── generated-test-sources
+│       │   └── test-annotations
+│       │── javadoc-bundle-options
+│       │   └── javadoc-options-javadoc-resources.xml
+│       │── maven-javadoc-plugin-stale-data.txt
+│       │── maven-status
+│       │   └── maven-compiler-plugin
+│       │       │── compile
+│       │       │   └── default-compile
+│       │       │       │── createdFiles.lst
+│       │       │       └── inputFiles.lst
+│       │       └── testCompile
+│       │           └── default-testCompile
+│       │               │── createdFiles.lst
+│       │               └── inputFiles.lst
+│       │── reports
+│       │   └── apidocs
+│       │       │── allclasses-index.html
+│       │       │── allpackages-index.html
+│       │       │── com
+│       │       │   └── example
+│       │       │       │── Carro.html
+│       │       │       │── class-use
+│       │       │       │   │── Carro.html
+│       │       │       │   │── Garagem.html
+│       │       │       │   │── ListaCircular.html
+│       │       │       │   │── Main.html
+│       │       │       │   └── Nó.html
+│       │       │       │── Garagem.html
+│       │       │       │── ListaCircular.html
+│       │       │       │── Main.html
+│       │       │       │── Nó.html
+│       │       │       │── package-summary.html
+│       │       │       │── package-tree.html
+│       │       │       └── package-use.html
+│       │       │── constant-values.html
+│       │       │── element-list
+│       │       │── help-doc.html
+│       │       │── index-all.html
+│       │       │── index.html
+│       │       │── legal
+│       │       │   │── ADDITIONAL_LICENSE_INFO
+│       │       │   │── ASSEMBLY_EXCEPTION
+│       │       │   │── dejavufonts.md
+│       │       │   │── jquery.md
+│       │       │   │── jqueryUI.md
+│       │       │   └── LICENSE
+│       │       │── member-search-index.js
+│       │       │── module-search-index.js
+│       │       │── overview-tree.html
+│       │       │── package-search-index.js
+│       │       │── resource-files
+│       │       │   │── copy.svg
+│       │       │   │── glass.svg
+│       │       │   │── jquery-ui.min.css
+│       │       │   │── left.svg
+│       │       │   │── link.svg
+│       │       │   │── right.svg
+│       │       │   │── stylesheet.css
+│       │       │   └── x.svg
+│       │       │── script-files
+│       │       │   │── jquery-3.7.1.min.js
+│       │       │   │── jquery-ui.min.js
+│       │       │   │── script.js
+│       │       │   │── search-page.js
+│       │       │   └── search.js
+│       │       │── search.html
+│       │       │── tag-search-index.js
+│       │       └── type-search-index.js
+│       │── surefire-reports
+│       │   │── com.example.CarroTest.txt
+│       │   │── com.example.GaragemTest.txt
+│       │   │── com.example.ListaCircularTest.txt
+│       │   │── TEST-com.example.CarroTest.xml
+│       │   │── TEST-com.example.GaragemTest.xml
+│       │   └── TEST-com.example.ListaCircularTest.xml
+│       └── test-classes
+│           └── com
+│               └── example
+│                   │── CarroTest.class
+│                   │── GaragemTest.class
+│                   └── ListaCircularTest.class
+└── README.md
