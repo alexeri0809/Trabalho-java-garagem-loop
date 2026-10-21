@@ -49,21 +49,16 @@ class ListaCircularTest {
     }
 
     @Test
-    void colocarNoVazioERetirarPorMatricula() {
-        ListaCircular lista = new ListaCircular();
-        lista.adicionarCarro(new Carro(1));
-        lista.adicionarVazio();
-        lista.colocarNoVazio(new Carro(9, new Matricula("AA-12-BB")));
-        assertFalse(lista.temVazio());
-        assertTrue(lista.retirarPorMatricula("AA-12-BB"));
-        assertTrue(lista.temVazio());
-        assertEquals(1, lista.posicaoDoVazio());
-    }
-
-    @Test
     void naoPermiteDoisVazios() {
         ListaCircular lista = new ListaCircular();
         lista.adicionarVazio();
         assertThrows(IllegalStateException.class, lista::adicionarVazio);
+    }
+
+    @Test
+    void moverVazioSemVazioLancaExcecao() {
+        ListaCircular lista = new ListaCircular();
+        lista.adicionarCarro(new Carro(1));
+        assertThrows(IllegalStateException.class, lista::moverVazio);
     }
 }

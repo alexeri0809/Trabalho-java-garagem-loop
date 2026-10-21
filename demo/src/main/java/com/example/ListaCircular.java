@@ -62,81 +62,9 @@ public class ListaCircular {
         proximo.setConteudo(null);
     }
 
-    /**
-     * O carro escolhido ocupa a vaga do Vazio.
-     *
-     * @param carro o carro que entra
-     * @throws IllegalStateException se não houver Vazio
-     */
-    public void colocarNoVazio(Carro carro) {
-        if (carro == null) {
-            throw new IllegalArgumentException("O carro que entra não pode ser null.");
-        }
-        No vazio = encontrarVazio();
-        if (vazio == null) {
-            throw new IllegalStateException("Não há vaga vazia.");
-        }
-        vazio.setConteudo(carro);
-    }
-
-    /**
-     * Tira da garagem o carro com esta matrícula. A vaga fica Vazio.
-     *
-     * @param matricula o texto da matrícula, já normalizado
-     * @return true se o carro estava na lista
-     */
-    public boolean retirarPorMatricula(String matricula) {
-        if (inicio == null) {
-            return false;
-        }
-        No atual = inicio;
-        do {
-            Carro carro = atual.getConteudo();
-            if (carro != null && carro.getMatricula().getValor().equals(matricula)) {
-                atual.setConteudo(null);
-                return true;
-            }
-            atual = atual.getNext();
-        } while (atual != inicio);
-        return false;
-    }
-
     /** @return true se alguma vaga for o Vazio */
     public boolean temVazio() {
         return encontrarVazio() != null;
-    }
-
-    /** @return true se já existir um carro com esta matrícula */
-    public boolean contemMatricula(String matricula) {
-        if (inicio == null) {
-            return false;
-        }
-        No atual = inicio;
-        do {
-            Carro carro = atual.getConteudo();
-            if (carro != null && carro.getMatricula().getValor().equals(matricula)) {
-                return true;
-            }
-            atual = atual.getNext();
-        } while (atual != inicio);
-        return false;
-    }
-
-    /** @return o maior id presente, ou 0 se não houver carros */
-    public int maiorId() {
-        if (inicio == null) {
-            return 0;
-        }
-        int maior = 0;
-        No atual = inicio;
-        do {
-            Carro carro = atual.getConteudo();
-            if (carro != null && carro.getId() > maior) {
-                maior = carro.getId();
-            }
-            atual = atual.getNext();
-        } while (atual != inicio);
-        return maior;
     }
 
     /**
