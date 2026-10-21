@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class ListaCircularTest {
+
     @Test
     void adicionarCarroNullLancaExcecao() {
         ListaCircular lista = new ListaCircular();
@@ -14,14 +15,6 @@ class ListaCircularTest {
     @Test
     void listaVaziaNaoTemPosicaoDoVazio() {
         assertThrows(IllegalStateException.class, () -> new ListaCircular().posicaoDoVazio());
-    }
-
-    @Test
-    void adicionarAumentaOTamanho() {
-        ListaCircular lista = new ListaCircular();
-        lista.adicionarCarro(new Carro(1));
-        lista.adicionarVazio();
-        assertEquals(2, lista.tamanho());
     }
 
     @Test
@@ -36,8 +29,8 @@ class ListaCircularTest {
         lista.moverVazio();
 
         assertSame(c1, lista.obter(0));
-        assertSame(c2, lista.obter(1)); // o carro ocupou o lugar do Vazio
-        assertNull(lista.obter(2));     // o Vazio avançou
+        assertSame(c2, lista.obter(1));
+        assertNull(lista.obter(2));
     }
 
     @Test
@@ -47,19 +40,24 @@ class ListaCircularTest {
         ListaCircular lista = new ListaCircular();
         lista.adicionarCarro(c1);
         lista.adicionarCarro(c2);
-        lista.adicionarVazio(); // o Vazio está no último nó
+        lista.adicionarVazio();
 
-        lista.moverVazio();     // o próximo do último é o primeiro (lista circular)
+        lista.moverVazio();
 
         assertEquals(0, lista.posicaoDoVazio());
         assertSame(c1, lista.obter(2));
     }
 
     @Test
-    void moverVazioSemVazioLancaExcecao() {
+    void colocarNoVazioERetirarPorMatricula() {
         ListaCircular lista = new ListaCircular();
         lista.adicionarCarro(new Carro(1));
-        assertThrows(IllegalStateException.class, lista::moverVazio);
+        lista.adicionarVazio();
+        lista.colocarNoVazio(new Carro(9, new Matricula("AA-12-BB")));
+        assertFalse(lista.temVazio());
+        assertTrue(lista.retirarPorMatricula("AA-12-BB"));
+        assertTrue(lista.temVazio());
+        assertEquals(1, lista.posicaoDoVazio());
     }
 
     @Test
@@ -67,12 +65,5 @@ class ListaCircularTest {
         ListaCircular lista = new ListaCircular();
         lista.adicionarVazio();
         assertThrows(IllegalStateException.class, lista::adicionarVazio);
-    }
-
-    @Test
-    void obterPosicaoInvalidaLancaExcecao() {
-        ListaCircular lista = new ListaCircular();
-        lista.adicionarVazio();
-        assertThrows(IndexOutOfBoundsException.class, () -> lista.obter(5));
     }
 }

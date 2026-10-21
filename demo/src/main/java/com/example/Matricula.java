@@ -7,6 +7,8 @@ import java.util.Objects;
  */
 public class Matricula {
 
+    private static final String LETRAS = "ABCDEFGHJKLMNPRSTUVXZ";
+
     private final String valor;
 
     /**
@@ -18,6 +20,23 @@ public class Matricula {
             throw new IllegalArgumentException("A matrícula não pode estar vazia.");
         }
         this.valor = valor.trim().toUpperCase();
+    }
+
+    /**
+     * Gera uma matrícula estável a partir do identificador do carro.
+     * O formato é o do exemplo do trabalho: AA-12-BB.
+     *
+     * @param id identificador positivo do carro
+     * @return a matrícula correspondente
+     */
+    public static Matricula gerar(int id) {
+        int n = LETRAS.length();
+        char a = LETRAS.charAt(Math.floorMod(id * 3, n));
+        char b = LETRAS.charAt(Math.floorMod(id * 7, n));
+        String numero = String.format("%02d", Math.floorMod(id * 17, 100));
+        char c = LETRAS.charAt(Math.floorMod(id * 11, n));
+        char d = LETRAS.charAt(Math.floorMod(id * 13, n));
+        return new Matricula("" + a + b + "-" + numero + "-" + c + d);
     }
 
     /** @return o texto da matrícula */

@@ -2,13 +2,12 @@ package com.example;
 
 /**
  * Lista ligada circular de vagas. O último nó aponta de volta para o primeiro.
- * Esconde os nós de quem a usa: o resto do programa só trabalha com carros e posições.
  * Uma vaga com conteúdo null representa o Vazio.
  */
 public class ListaCircular {
 
-    private Nó inicio; // primeiro nó
-    private Nó fim;    // último nó (aponta para o início)
+    private No inicio;
+    private No fim;
     private int tamanho;
 
     /**
@@ -36,43 +35,116 @@ public class ListaCircular {
         adicionar(null);
     }
 
-    /** Cria um nó novo, liga-o ao fim e fecha sempre o círculo. */
     private void adicionar(Carro carro) {
-        Nó novo = new Nó(carro);
+        No novo = new No(carro);
         if (inicio == null) {
             inicio = novo;
         } else {
             fim.setNext(novo);
         }
         fim = novo;
-        fim.setNext(inicio); // o último aponta de volta para o primeiro
+        fim.setNext(inicio);
         tamanho++;
     }
 
     /**
-     * Move o Vazio uma casa no sentido normal (horário): o carro da frente
-     * ocupa o lugar do Vazio e o Vazio avança.
+     * O carro da frente ocupa o lugar do Vazio e o Vazio avança uma casa.
      *
      * @throws IllegalStateException se a lista não tiver Vazio
      */
     public void moverVazio() {
-        Nó vazio = encontrarVazio();
+        No vazio = encontrarVazio();
         if (vazio == null) {
             throw new IllegalStateException("A lista não tem Vazio.");
         }
-        Nó proximo = vazio.getNext();
-        vazio.setConteudo(proximo.getConteudo()); // o carro passa para a vaga do Vazio
-        proximo.setConteudo(null);                // o Vazio avança uma casa
+        No proximo = vazio.getNext();
+        vazio.setConteudo(proximo.getConteudo());
+        proximo.setConteudo(null);
     }
 
     /**
-     * Indica em que posição está o Vazio.
+     * O carro escolhido ocupa a vaga do Vazio.
      *
+     * @param carro o carro que entra
+     * @throws IllegalStateException se não houver Vazio
+     */
+    public void colocarNoVazio(Carro carro) {
+        if (carro == null) {
+            throw new IllegalArgumentException("O carro que entra não pode ser null.");
+        }
+        No vazio = encontrarVazio();
+        if (vazio == null) {
+            throw new IllegalStateException("Não há vaga vazia.");
+        }
+        vazio.setConteudo(carro);
+    }
+
+    /**
+     * Tira da garagem o carro com esta matrícula. A vaga fica Vazio.
+     *
+     * @param matricula o texto da matrícula, já normalizado
+     * @return true se o carro estava na lista
+     */
+    public boolean retirarPorMatricula(String matricula) {
+        if (inicio == null) {
+            return false;
+        }
+        No atual = inicio;
+        do {
+            Carro carro = atual.getConteudo();
+            if (carro != null && carro.getMatricula().getValor().equals(matricula)) {
+                atual.setConteudo(null);
+                return true;
+            }
+            atual = atual.getNext();
+        } while (atual != inicio);
+        return false;
+    }
+
+    /** @return true se alguma vaga for o Vazio */
+    public boolean temVazio() {
+        return encontrarVazio() != null;
+    }
+
+    /** @return true se já existir um carro com esta matrícula */
+    public boolean contemMatricula(String matricula) {
+        if (inicio == null) {
+            return false;
+        }
+        No atual = inicio;
+        do {
+            Carro carro = atual.getConteudo();
+            if (carro != null && carro.getMatricula().getValor().equals(matricula)) {
+                return true;
+            }
+            atual = atual.getNext();
+        } while (atual != inicio);
+        return false;
+    }
+
+    /** @return o maior id presente, ou 0 se não houver carros */
+    public int maiorId() {
+        if (inicio == null) {
+            return 0;
+        }
+        int maior = 0;
+        No atual = inicio;
+        do {
+            Carro carro = atual.getConteudo();
+            if (carro != null && carro.getId() > maior) {
+                maior = carro.getId();
+            }
+            atual = atual.getNext();
+        } while (atual != inicio);
+        return maior;
+    }
+
+    /**
      * @return a posição do Vazio (0 é o primeiro nó)
      * @throws IllegalStateException se a lista não tiver Vazio
      */
     public int posicaoDoVazio() {
-        Nó atual = inicio;
+        No atual = inicio;
         int posicao = 0;
         if (atual != null) {
             do {
@@ -87,8 +159,6 @@ public class ListaCircular {
     }
 
     /**
-     * Devolve o conteúdo de uma posição.
-     *
      * @param posicao a posição (0 é o primeiro nó)
      * @return o carro dessa posição, ou null se for o Vazio
      * @throws IndexOutOfBoundsException se a posição não existir
@@ -97,7 +167,7 @@ public class ListaCircular {
         if (posicao < 0 || posicao >= tamanho) {
             throw new IndexOutOfBoundsException("Posição inválida: " + posicao);
         }
-        Nó atual = inicio;
+        No atual = inicio;
         for (int i = 0; i < posicao; i++) {
             atual = atual.getNext();
         }
@@ -109,12 +179,11 @@ public class ListaCircular {
         return tamanho;
     }
 
-    /** Percorre o círculo até encontrar o nó vazio; devolve null se não houver. */
-    private Nó encontrarVazio() {
+    private No encontrarVazio() {
         if (inicio == null) {
             return null;
         }
-        Nó atual = inicio;
+        No atual = inicio;
         do {
             if (atual.isVazio()) {
                 return atual;
