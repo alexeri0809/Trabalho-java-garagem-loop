@@ -56,6 +56,32 @@ class ListaCircularTest {
     }
 
     @Test
+    void substituirMaisAntigoTrocaOCarroDeMenorId() {
+        Carro c1 = new Carro(1);
+        Carro c2 = new Carro(2);
+        Carro novo = new Carro(3);
+        ListaCircular lista = new ListaCircular();
+        lista.adicionarCarro(c2);
+        lista.adicionarVazio();
+        lista.adicionarCarro(c1);
+
+        Carro saiu = lista.substituirMaisAntigo(novo);
+
+        assertSame(c1, saiu);
+        assertSame(c2, lista.obter(0));
+        assertNull(lista.obter(1));
+        assertSame(novo, lista.obter(2));
+        assertEquals(1, lista.posicaoDoVazio());
+    }
+
+    @Test
+    void substituirMaisAntigoSemCarrosDevolveNull() {
+        ListaCircular lista = new ListaCircular();
+        lista.adicionarVazio();
+        assertNull(lista.substituirMaisAntigo(new Carro(1)));
+    }
+
+    @Test
     void moverVazioSemVazioLancaExcecao() {
         ListaCircular lista = new ListaCircular();
         lista.adicionarCarro(new Carro(1));

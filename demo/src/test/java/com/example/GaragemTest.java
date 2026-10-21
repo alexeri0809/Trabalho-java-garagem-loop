@@ -38,14 +38,61 @@ class GaragemTest {
     }
 
     @Test
-    void nenhumaMatriculaSePerdeDuranteAsRotacoes() {
+    void passosNoMeioDaVoltaNaoTrocamCarros() {
+        Garagem garagem = new Garagem();
+        for (int i = 1; i < 5; i++) {
+            Garagem.Passo passo = garagem.avancar();
+            assertNull(passo.matriculaQueSaiu);
+            assertNull(passo.matriculaQueEntrou);
+        }
+    }
+
+    @Test
+    void noFimDaPrimeiraVoltaSaiOCarroMaisAntigoEEntraUmNovo() {
+        Garagem garagem = new Garagem();
+        Garagem.Passo passo = null;
+        for (int i = 0; i < 5; i++) {
+            passo = garagem.avancar();
+        }
+        assertTrue(passo.voltaCompleta);
+        assertEquals(Matricula.gerar(1), passo.matriculaQueSaiu);
+        assertEquals(Matricula.gerar(5), passo.matriculaQueEntrou);
+        assertFalse(passo.estado.contains(slot(1)));
+        assertTrue(passo.estado.contains(slot(5)));
+        assertEquals(1, contarVazios(passo.estado));
+    }
+
+    @Test
+    void aCadaVoltaSaiUmCarroEEntraUmComMatriculaNova() {
+        Garagem garagem = new Garagem();
+        java.util.Set<String> jaEntraram = new java.util.HashSet<>();
+        for (int id = 1; id <= 4; id++) {
+            jaEntraram.add(Matricula.gerar(id).getValor());
+        }
+        int voltas = 0;
+        for (int i = 1; i <= 50; i++) {
+            Garagem.Passo passo = garagem.avancar();
+            if (passo.voltaCompleta) {
+                voltas++;
+                assertTrue(jaEntraram.add(passo.matriculaQueEntrou.getValor()),
+                        "Matrícula repetida: " + passo.matriculaQueEntrou);
+                assertNotEquals(passo.matriculaQueSaiu, passo.matriculaQueEntrou);
+            }
+        }
+        assertEquals(10, voltas);
+    }
+
+    @Test
+    void depoisDeDezVoltasTemOsQuatroCarrosMaisRecentes() {
         Garagem garagem = new Garagem();
         for (int i = 0; i < 50; i++) {
             garagem.avancar();
         }
-        for (int id = 1; id <= 4; id++) {
+        for (int id = 11; id <= 14; id++) {
             assertTrue(garagem.estado().contains(slot(id)), "Falta " + slot(id));
         }
+        assertFalse(garagem.estado().contains(slot(1)));
+        assertFalse(garagem.estado().contains(slot(10)));
     }
 
     @Test

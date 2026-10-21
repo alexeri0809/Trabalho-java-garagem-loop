@@ -21,7 +21,10 @@ mvn test
 
 1. Monta a garagem: carro 1, Vazio, carro 4, carro 3, carro 2.
 2. Entra num **ciclo infinito**: o Vazio dá voltas sem parar.
-3. Termina apenas com **Ctrl+C**.
+3. No fim de **cada volta**, o carro mais antigo sai e entra um carro novo com uma matrícula nova.
+   A linha do contador mostra as duas matrículas, por exemplo:
+   `=== Volta 1 completa === Saiu: DH-17-MP | Entrou: XX-99-YY`
+4. Termina apenas com **Ctrl+C**.
 
 ## Classes
 

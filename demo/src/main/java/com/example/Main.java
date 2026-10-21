@@ -2,7 +2,8 @@ package com.example;
 
 /**
  * Garagem com 5 vagas (4 carros e 1 Vazio). O Vazio roda para sempre;
- * o programa só termina com Ctrl+C.
+ * a cada volta sai um carro e entra um carro novo, e o contador de voltas mostra as duas matrículas.
+ * O programa só termina com Ctrl+C.
  */
 public class Main {
 
@@ -23,7 +24,8 @@ public class Main {
             Garagem.Passo passo = garagem.avancar();
             if (passo.voltaCompleta) {
                 voltas++;
-                System.out.println("=== Volta " + voltas + " completa ===");
+                System.out.println("=== Volta " + voltas + " completa === Saiu: "
+                        + passo.matriculaQueSaiu + " | Entrou: " + passo.matriculaQueEntrou);
             }
             System.out.println(passo.estado);
         }

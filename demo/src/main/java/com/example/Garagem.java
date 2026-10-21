@@ -3,6 +3,7 @@ package com.example;
 /**
  * Garagem de rotação com 5 vagas em círculo: 4 carros e 1 Vazio.
  * Em cada passo o carro da frente ocupa o Vazio e o Vazio avança uma casa.
+ * No fim de cada volta, o carro mais antigo sai e entra um carro novo com matrícula nova.
  * A Garagem só conhece a ListaCircular, nunca os nós.
  */
 public class Garagem {
@@ -14,6 +15,7 @@ public class Garagem {
 
     private final ListaCircular vagas = new ListaCircular();
     private final int posicaoInicialDoVazio;
+    private int proximoId;
 
     /**
      * Ordem inicial: carro 1, Vazio, carro 4, carro 3, carro 2.
@@ -26,17 +28,27 @@ public class Garagem {
             vagas.adicionarCarro(new Carro(id));
         }
         posicaoInicialDoVazio = vagas.posicaoDoVazio();
+        proximoId = VAGAS;
     }
 
     /**
-     * Dá um passo da rotação: o Vazio avança uma casa.
+     * Dá um passo da rotação: o Vazio avança uma casa. Se isso completar uma volta,
+     * o carro mais antigo sai e entra um carro novo com matrícula nova.
      *
-     * @return o estado depois do passo e se o Vazio completou uma volta
+     * @return o estado depois do passo e, no fim de uma volta, as matrículas que saíram e entraram
      */
     public Passo avancar() {
         vagas.moverVazio();
         boolean volta = vagas.posicaoDoVazio() == posicaoInicialDoVazio;
-        return new Passo(estado(), volta);
+        Matricula saiu = null;
+        Matricula entrou = null;
+        if (volta) {
+            Carro novo = new Carro(proximoId++);
+            Carro antigo = vagas.substituirMaisAntigo(novo);
+            saiu = antigo.getMatricula();
+            entrou = novo.getMatricula();
+        }
+        return new Passo(estado(), volta, saiu, entrou);
     }
 
     /**
@@ -58,10 +70,17 @@ public class Garagem {
     public static final class Passo {
         public final String estado;
         public final boolean voltaCompleta;
+        /** Matrícula do carro que saiu no fim da volta, ou null se a volta não acabou. */
+        public final Matricula matriculaQueSaiu;
+        /** Matrícula do carro que entrou no fim da volta, ou null se a volta não acabou. */
+        public final Matricula matriculaQueEntrou;
 
-        public Passo(String estado, boolean voltaCompleta) {
+        public Passo(String estado, boolean voltaCompleta,
+                     Matricula matriculaQueSaiu, Matricula matriculaQueEntrou) {
             this.estado = estado;
             this.voltaCompleta = voltaCompleta;
+            this.matriculaQueSaiu = matriculaQueSaiu;
+            this.matriculaQueEntrou = matriculaQueEntrou;
         }
     }
 }

@@ -62,6 +62,38 @@ public class ListaCircular {
         proximo.setConteudo(null);
     }
 
+    /**
+     * O carro mais antigo (o de menor id) sai e o carro novo fica na vaga dele.
+     * O Vazio não é afetado.
+     *
+     * @param novo o carro que entra (não pode ser null)
+     * @return o carro que saiu, ou null se não houver nenhum carro na lista
+     * @throws IllegalArgumentException se o carro novo for null
+     */
+    public Carro substituirMaisAntigo(Carro novo) {
+        if (novo == null) {
+            throw new IllegalArgumentException("O carro que entra não pode ser null.");
+        }
+        if (inicio == null) {
+            return null;
+        }
+        No maisAntigo = null;
+        No atual = inicio;
+        do {
+            Carro carro = atual.getConteudo();
+            if (carro != null && (maisAntigo == null || carro.getId() < maisAntigo.getConteudo().getId())) {
+                maisAntigo = atual;
+            }
+            atual = atual.getNext();
+        } while (atual != inicio);
+        if (maisAntigo == null) {
+            return null;
+        }
+        Carro saiu = maisAntigo.getConteudo();
+        maisAntigo.setConteudo(novo);
+        return saiu;
+    }
+
     /** @return true se alguma vaga for o Vazio */
     public boolean temVazio() {
         return encontrarVazio() != null;
